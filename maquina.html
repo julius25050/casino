@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Máquina - Casino</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1 id="nombreMaquinaHeader">🎰 Máquina</h1>
+                    <p class="subtitle" id="ubicacionMaquina">Detalle y contadores</p>
+                </div>
+                <div class="header-buttons">
+                    <button onclick="window.location.href='index.html'" class="btn btn-secondary">
+                        ← Volver a la Lista
+                    </button>
+                    <button id="btnCerrarSesion" class="btn btn-logout">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Información de la máquina -->
+        <div class="card">
+            <h2>📊 Contadores Actuales</h2>
+            <div class="info-grid">
+                <div class="info-item-simple">
+                    <div class="info-icon">📊</div>
+                    <div class="info-content">
+                        <div class="info-label">Contador Actual</div>
+                        <div class="info-value-simple" id="contadorGeneral">$0.00</div>
+                    </div>
+                </div>
+                <div class="info-item-simple">
+                    <div class="info-icon">🎁</div>
+                    <div class="info-content">
+                        <div class="info-label">Premios Actual</div>
+                        <div class="info-value-simple" id="contadorPremios">$0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Último período -->
+        <div class="card info-card">
+            <h2>📅 Último Período</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">💵</div>
+                    <div class="info-content">
+                        <div class="info-label">Recaudo</div>
+                        <div class="info-value" id="ultimoRecaudo">$0.00</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">💸</div>
+                    <div class="info-content">
+                        <div class="info-label">Premios Pagados</div>
+                        <div class="info-value" id="ultimosPremios">$0.00</div>
+                    </div>
+                </div>
+                <div class="info-item highlight-item">
+                    <div class="info-icon">✅</div>
+                    <div class="info-content">
+                        <div class="info-label">Utilidad</div>
+                        <div class="info-value" id="ultimaUtilidad">$0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Formulario para agregar registro -->
+        <div class="card">
+            <h2>📝 Agregar Nuevo Registro</h2>
+            <form id="formRegistro">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contadorEntrada">Contador Actual ($):</label>
+                        <input type="number" id="contadorEntrada" required placeholder="0.00" step="0.01" min="0">
+                        <small>Ingresa el valor ACTUAL que muestra el contador de la máquina</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contadorSalida">Contador de Premios Actual ($):</label>
+                        <input type="number" id="contadorSalida" required placeholder="0.00" step="0.01" min="0">
+                        <small>Ingresa el valor ACTUAL del contador de premios de la máquina</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" id="fecha" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notas">Notas (opcional):</label>
+                    <textarea id="notas" rows="2" placeholder="Observaciones adicionales..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar Registro</button>
+            </form>
+        </div>
+
+        <!-- Historial de la máquina -->
+        <div class="card">
+            <div class="card-header">
+                <h2>📜 Historial de Registros</h2>
+                <button id="btnLimpiarHistorial" class="btn btn-danger">Limpiar Historial</button>
+            </div>
+
+            <!-- Filtro de fechas -->
+            <div class="filtro-fechas">
+                <h3>🔍 Filtrar por Período</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fechaDesde">Desde:</label>
+                        <input type="date" id="fechaDesde">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaHasta">Hasta:</label>
+                        <input type="date" id="fechaHasta">
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: flex-end; gap: 10px;">
+                        <button id="btnFiltrar" class="btn btn-secondary">Filtrar</button>
+                        <button id="btnLimpiarFiltro" class="btn btn-secondary">Ver Todo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen del período filtrado -->
+            <div id="resumenPeriodo" class="resumen-periodo" style="display: none;">
+                <h3>📊 Resumen del Período Seleccionado</h3>
+                <div class="resumen-grid">
+                    <div class="resumen-item">
+                        <span class="resumen-label">Recaudo Total:</span>
+                        <span class="resumen-value" id="periodoRecaudo">$0.00</span>
+                    </div>
+                    <div class="resumen-item">
+                        <span class="resumen-label">Premios Pagados:</span>
+                        <span class="resumen-value" id="periodoPremios">$0.00</span>
+                    </div>
+                    <div class="resumen-item highlight">
+                        <span class="resumen-label">Utilidad:</span>
+                        <span class="resumen-value" id="periodoUtilidad">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="tablaHistorial">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Contador</th>
+                            <th>Premios</th>
+                            <th>Recaudo</th>
+                            <th>Premios Pagados</th>
+                            <th>Utilidad</th>
+                            <th>Notas</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historialBody">
+                        <!-- Los registros se agregarán aquí -->
+                    </tbody>
+                </table>
+                <div id="mensajeVacio" class="mensaje-vacio" style="display: none;">
+                    No hay registros para esta máquina. Agrega tu primer registro arriba.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="maquina.js"></script>
+</body>
+</html>

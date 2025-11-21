@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Casino</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-icon">🎰</div>
+                <h1>Control de Máquinas</h1>
+                <p>Sistema de Casino</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="usuario">Usuario:</label>
+                    <input 
+                        type="text" 
+                        id="usuario" 
+                        required 
+                        placeholder="Ingresa tu usuario"
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="contrasena">Contraseña:</label>
+                    <input 
+                        type="password" 
+                        id="contrasena" 
+                        required 
+                        placeholder="Ingresa tu contraseña"
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <div id="mensajeError" class="mensaje-error" style="display: none;"></div>
+
+                <button type="submit" class="btn btn-primary btn-login">
+                    Iniciar Sesión
+                </button>
+            </form>
+
+            <div class="login-info">
+                <p><strong>Usuario por defecto:</strong> admin</p>
+                <p><strong>Contraseña por defecto:</strong> casino123</p>
+                <hr>
+                <p style="font-size: 0.85em; color: #888; margin-top: 15px;">
+                    💡 <strong>Tip:</strong> Puedes cambiar el usuario y contraseña editando el archivo <code>auth.js</code>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Manejar el formulario de login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const usuario = document.getElementById('usuario').value;
+            const contrasena = document.getElementById('contrasena').value;
+            const mensajeError = document.getElementById('mensajeError');
+            
+            if (validarCredenciales(usuario, contrasena)) {
+                // Guardar sesión
+                localStorage.setItem('sesionActiva', 'true');
+                localStorage.setItem('usuario', usuario);
+                
+                // Redirigir a la página principal
+                window.location.href = 'index.html';
+            } else {
+                // Mostrar error
+                mensajeError.textContent = '❌ Usuario o contraseña incorrectos';
+                mensajeError.style.display = 'block';
+                
+                // Limpiar campos
+                document.getElementById('contrasena').value = '';
+            }
+        });
+
+        // Si ya hay sesión activa, redirigir
+        if (localStorage.getItem('sesionActiva') === 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Máquinas - Casino</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>🎰 Control de Máquinas de Casino</h1>
+                    <p class="subtitle">Gestión de Máquinas</p>
+                </div>
+                <button id="btnCerrarSesion" class="btn btn-logout">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <!-- Formulario para agregar máquina -->
+        <div class="card">
+            <h2>➕ Agregar Nueva Máquina</h2>
+            <form id="formAgregarMaquina">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombreMaquina">Nombre de la Máquina:</label>
+                        <input type="text" id="nombreMaquina" required placeholder="Ej: Máquina 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="ubicacion">Ubicación (opcional):</label>
+                        <input type="text" id="ubicacion" placeholder="Ej: Sala principal">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Máquina</button>
+            </form>
+        </div>
+
+        <!-- Resumen general -->
+        <div class="card summary-card">
+            <h2>📊 Resumen General de Todas las Máquinas</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Total Máquinas</div>
+                    <div class="summary-value" id="totalMaquinas">0</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Total Echado</div>
+                    <div class="summary-value" id="totalEntrada">$0.00</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Total Pagado</div>
+                    <div class="summary-value" id="totalSalida">$0.00</div>
+                </div>
+                <div class="summary-item highlight">
+                    <div class="summary-label">Utilidad Total</div>
+                    <div class="summary-value" id="utilidadTotal">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de máquinas -->
+        <div class="card">
+            <h2>🎮 Mis Máquinas</h2>
+            <div id="listaMaquinas" class="maquinas-grid">
+                <!-- Las máquinas se agregarán aquí dinámicamente -->
+            </div>
+            <div id="mensajeVacio" class="mensaje-vacio" style="display: none;">
+                No hay máquinas registradas. Agrega tu primera máquina arriba.
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="machines.js"></script>
+</body>
+</html>
