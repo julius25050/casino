@@ -39,15 +39,18 @@ function cerrarSesion() {
     window.location.href = 'login.html';
 }
 
-// Verificar sesión en páginas protegidas
-if (window.location.pathname.includes('index.html') || window.location.pathname.includes('maquina.html')) {
-    verificarSesion();
-}
-
-// Agregar evento al botón de cerrar sesión si existe
-document.addEventListener('DOMContentLoaded', function() {
-    const btnCerrarSesion = document.getElementById('btnCerrarSesion');
-    if (btnCerrarSesion) {
-        btnCerrarSesion.addEventListener('click', cerrarSesion);
+// Solo ejecutar en el navegador (lado del cliente)
+if (typeof window !== 'undefined') {
+    // Verificar sesión en páginas protegidas
+    if (window.location.pathname.includes('index.html') || window.location.pathname.includes('maquina.html')) {
+        verificarSesion();
     }
-});
+
+    // Agregar evento al botón de cerrar sesión si existe
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnCerrarSesion = document.getElementById('btnCerrarSesion');
+        if (btnCerrarSesion) {
+            btnCerrarSesion.addEventListener('click', cerrarSesion);
+        }
+    });
+}
